@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1115">
+<title>Vocab Trainer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ============ LOCK SCREEN ============ -->
+<div class="lock" id="lockScreen">
+  <div class="lock-box">
+    <div class="lock-brand">Vocab<span>Trainer</span></div>
+    <div class="lock-hint" id="lockHint">Enter your passphrase</div>
+    <input type="password" id="passInput" autocomplete="current-password"
+           inputmode="numeric" placeholder="••••">
+    <button class="primary" id="btnUnlock">Unlock</button>
+    <div class="lock-err" id="lockErr"></div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div class="app" id="app" style="display:none">
+  <header>
+    <div class="brand">Vocab<span>Trainer</span></div>
+    <div class="hdr-right">
+      <button class="lang-btn" id="langBtn">中文</button>
+      <button class="icon-btn" id="btnLock" title="Lock">⎋</button>
+    </div>
+  </header>
+
+  <nav>
+    <button class="on" data-view="review" data-i18n="tab_review">Review</button>
+    <button data-view="add" data-i18n="tab_add">Add</button>
+    <button data-view="list" data-i18n="tab_list">Library</button>
+  </nav>
+
+  <main>
+    <!-- REVIEW -->
+    <section class="view on" id="view-review">
+      <div class="stats">
+        <div class="stat"><b id="statDue">0</b><small data-i18n="stat_due">Left today</small></div>
+        <div class="stat"><b id="statPassed">0</b><small data-i18n="stat_passed">Passed today</small></div>
+        <div class="stat"><b id="statTotal">0</b><small data-i18n="stat_total">In library</small></div>
+      </div>
+
+      <div class="mode-box">
+        <button class="on" data-mode="en2cn" data-i18n="mode_en2cn">English → Chinese</button>
+        <button data-mode="cn2en" data-i18n="mode_cn2en">Chinese → Spell</button>
+      </div>
+
+      <div class="card" id="reviewCard">
+        <div class="word" id="rw">—</div>
+        <div class="phon-row">
+          <span class="phon" id="rphon"></span>
+          <button class="spk" id="btnSpeak" title="Play pronunciation">🔊</button>
+        </div>
+        <div class="pos" id="rpos"></div>
+        <div class="mean hidden" id="rmean"></div>
+        <div class="ex hidden" id="rex"></div>
+        <input type="text" class="spell hidden" id="spellInput" autocomplete="off"
+               autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="">
+        <div class="verdict" id="verdict"></div>
+      </div>
+
+      <div class="row" id="answerRow">
+        <button class="btn-known" id="btnKnow" data-i18n="btn_know">Got it</button>
+        <button class="ghost" id="btnNo" data-i18n="btn_no">Not yet</button>
+      </div>
+      <button class="primary" id="btnReveal" data-i18n="btn_reveal">Show answer</button>
+      <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="loading" id="loading"></div>
+      <div class="empty hidden" id="reviewEmpty"></div>
+    </section>
+
+    <!-- ADD -->
+    <section class="view" id="view-add">
+      <div class="card">
+        <textarea id="addInput" placeholder=""></textarea>
+        <div class="loading" id="addMsg"></div>
+        <button class="primary" id="btnAdd" data-i18n="btn_add">Add words</button>
+      </div>
+      <div id="addResults"></div>
+    </section>
+
+    <!-- LIBRARY -->
+    <section class="view" id="view-list">
+      <ul class="wlist" id="wordList"></ul>
+      <div class="empty hidden" id="listEmpty"></div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="audio-host" id="audioHost"></div>
+
+<script src="api.js"></script>
+<script src="dict.js"></script>
+<script src="store.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
